@@ -12,7 +12,10 @@ def RunCommand(command) -> str:
   Returns:
       Output of command
   """
-    return os.popen(command).read()
+    try:
+        return os.popen(command).read()
+    except Exception as e:
+        return f"Error occourd while processing: {e}"
 
 
 class review:
@@ -58,21 +61,36 @@ class review:
             if response.message.tool_calls:
                 print("attempted tool calling")
                 for tool in response.message.tool_calls:
-                    print("-- TOOL CALLING RAN --")
-                    print(
-                        "- The LLM is currently running tests on your computer in order to generate a review -"
-                    )
+                    try:
+                        print("-- TOOL CALLING RAN --")
+                        print(
+                            "- The LLM is currently running tests on your computer in order to generate a review -"
+                        )
 
-                    print(f"Command; {tool.function.arguments}")
-                    result = RunCommand(**tool.function.arguments)
-                    print(f"Result: {result}")
-                    messageHistory.append(
-                        {
-                            "role": "tool",
-                            "tool_name": tool.function.name,
-                            "content": str(result),
-                        }
-                    )
-                    print("-- END OF TOOL CALL --")
+                        print(f"Command; {tool.function.arguments}")
+                        result = RunCommand(**tool.function.arguments)
+                        print(f"Result: {result}")
+                        messageHistory.append(
+                            {
+                                "role": "tool",
+                                "tool_name": tool.function.name,
+                                "content": str(result),
+                            }
+                        )
+                        print("-- END OF TOOL CALL --")
+                    except Exception as e:
+                        print("-- TOOL CALLING ERROR --")
+                        print("- Error occourd while using tool calling -")
+
+                        print(f"Result: {e}")
+                        messageHistory.append(
+                            {
+                                "role": "tool",
+                                "tool_name": tool.function.name,
+                                "content": str(e),
+                            }
+                        )
+                        print("-- END OF TOOL ERROR --")
+
             else:
                 return response["message"]["content"]
