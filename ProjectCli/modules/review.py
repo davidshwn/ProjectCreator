@@ -34,6 +34,7 @@ class review:
 - When creating the markdown file always include the following things; Introduction, Review, Evaluation, Score, Rating, Comments, Extra information (if needed)
 - when your evalution the project use the terminal (tool calling) to inspect files and read them.
 - be VERY critical when reviewing the project. The user has to learn fropm this experience.
+- before starting its adviced to do pwd and ls using tool calling as you can find the right place to review.
 
 
 -- MARKDOWN FILE --
