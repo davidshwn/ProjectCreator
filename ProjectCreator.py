@@ -3,9 +3,11 @@ import argparse
 import os
 
 from modules.init import init
+from modules.review import review
 
 # load the classes
 initClass = init()
+reviewClass = review()
 
 
 """
@@ -17,7 +19,7 @@ Parser functions
 def initParser(args):
     print("Creating project idea. This may take some time based on hardware.")
     # get systemPrompt
-    print("Creating system prompt. (1/3")
+    print("Creating system prompt. (1/3)")
     systemPrompt: str = initClass.generatePrompt(args)
     # print(systemPrompt)
 
@@ -35,6 +37,30 @@ def initParser(args):
     return
 
 
+def reviewParser(args):
+    print("Generating review. This may take some time based on hardware.")
+    print(
+        "THE LLM MAY ACCESS FILES AND IF NOT HANDLED PROPERLY MODIFY THEM. YOU WILL BE NOTIFIED WHEN THE LLM IS DOING SUCH ACTIONS."
+    )
+    # get Instuctions
+    print("Getting instructions. (1/3)")
+    markdownFile: str = ""
+    with open(f"{os.path.abspath(os.getcwd())}/Instructions.md", "r") as f:
+        markdownFile = f.read()
+
+    print("Generating Review (.MD) file. (2/3)")
+    review = reviewClass.generateReview(
+        providedModel=args.model, platform=args.platform, markdown=markdownFile
+    )
+
+    print("Creating Review MD file. (3/3)")
+    with open(f"{os.path.abspath(os.getcwd())}/Review.md", "w") as f:
+        f.write(review)
+
+    print(f"-- COMPLETED --\nReview path: {os.path.abspath(os.getcwd())}/Review.md")
+    return
+
+
 """
 Main class
 """
@@ -47,6 +73,7 @@ def main():
     )
     subparsers = parser.add_subparsers(required=True)
 
+    # init parser
     parser_init = subparsers.add_parser(
         "init", help="Creates a new project using LLM's"
     )
@@ -111,6 +138,30 @@ def main():
         type=str,
     )
     parser_init.set_defaults(func=initParser)
+
+    # review parser
+    parser_review = subparsers.add_parser(
+        "review", help="Reviews project assignment [REQUIRES 'Instructions.md' FILE]"
+    )
+
+    parser_review.add_argument(
+        "-m",
+        "--model",
+        help="Defines the ollama model. [Default; ministral-3]",
+        default="ministral-3",
+        required=False,
+        type=str,
+    )
+
+    parser_review.add_argument(
+        "-p",
+        "--platform",
+        help="Defines the platform the user is on. [Default; Ubuntu]",
+        default="Ubuntu",
+        required=False,
+        type=str,
+    )
+    parser_review.set_defaults(func=reviewParser)
 
     args = parser.parse_args()
     args.func(args)
