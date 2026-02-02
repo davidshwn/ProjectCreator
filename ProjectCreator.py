@@ -19,7 +19,7 @@ def initParser(args):
     # get systemPrompt
     print("Creating system prompt. (1/3")
     systemPrompt: str = initClass.generatePrompt(args)
-    print(systemPrompt)
+    # print(systemPrompt)
 
     # Let the LLM generate a system prompt
     print("Generating Instructions (.MD) file. (2/3)")
