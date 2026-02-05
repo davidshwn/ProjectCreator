@@ -4,7 +4,7 @@ A easier way to create projects to grow your skills.
 > [!IMPORTANT]  
 > This entire project is still being worked on and is on early development. Please report any issues you've saw! This app is currently tested on MacOS however will be tested later on other platforms
 
-## Introduction.
+## Introduction
 Do you sometimes also lack the creativity to create a project but you just want to build so you can grow your experience? So do I! This CLI app focusses on creating project ideas using LLM’s so you can expand your knowledge while you can focus on finding actual creativity for new projects!
 
 ## Features
@@ -13,7 +13,7 @@ Do you sometimes also lack the creativity to create a project but you just want 
 - Creating assignments [WIP]
 - Reviewing assignments [EARLY WIP]
 
-## getting started
+## Getting started
 To get started; Make sure you have python installed. The currently supported/tested version is [python 3.11.9](https://www.python.org/downloads/release/python-3119/).
 
 The second requirement is to have [Ollama installed](https://ollama.com/) on your computer with [ministral-3 as model](https://ollama.com/library/ministral-3). (If you prefer another model you could always change models with the ``-m`` parameter. This will be described later!)
@@ -23,11 +23,11 @@ Once you have these 2 apps installed with the model run the following steps;
 2. Navigate to the folder you just cloned.
 3. Open a terminal and run the following command ``pip install .`` (or ``pip3 install .``)
 
-## usage
+## Usage
 Using this CLI tool is really easy. To get all parameters just use ``projectcreator [argument] -h``
 
-## examples
-### creating a assignment
+## Examples
+### Creating a assignment
 to create a assignment navigate to the folder of your choice and run ``projectcreator init``. For parameters you could add run ``projectcreator init -h``. Default params are shown as well. Upon finishing it would create a MD file on the folder you're working in.
 
 For example you could run the following command
