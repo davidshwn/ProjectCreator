@@ -62,6 +62,7 @@ ProjectCreator assumes upon reviewing the code you're running on linux. If you'r
 ## Issues and feedback
 > [!NOTE]  
 > WhoIsDavid may not allow the creation of accounts, consider going to the github mirror and create a issue there.
+
 If you experience any issues or have any feedback feel free to create a issue on the service you're cloning it from!
 
 ## License
