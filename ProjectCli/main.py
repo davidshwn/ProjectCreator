@@ -39,6 +39,7 @@ def initParser(args):
 
 def reviewParser(args):
     print("Generating review. This may take some time based on hardware.")
+    print("⚠ THIS IS STILL A EARLY WIP, REVIEWING MAY NOT BE ACCURATE")
     print(
         "THE LLM MAY ACCESS FILES AND IF NOT HANDLED PROPERLY MODIFY THEM. YOU WILL BE NOTIFIED WHEN THE LLM IS DOING SUCH ACTIONS."
     )

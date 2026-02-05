@@ -27,7 +27,7 @@ class review:
         messageHistory = [
             {
                 "role": "system",
-                "content": f"""You are going to review a project the user made based on a MD file.
+                "content": f"""You are going to review/rate a project the user made based on a MD file.
 - The user is currently on the platform; {platform}
 - You will be allowed using tool calling to execute commands directly on the OS machine.
 - You are NOT allowed to search up the web, do curl requests, modify files, or harm the device. The tool calling is intended purely for read only access
@@ -38,10 +38,12 @@ class review:
 - when your evalution the project use the terminal (tool calling) to inspect files and read them.
 - be VERY critical when reviewing the project. The user has to learn fropm this experience.
 - before starting its adviced to do pwd and ls using tool calling as you can find the right place to review.
+- You will be validating the code like a teacher. Make sure to inspect the code as well
 
 
 -- MARKDOWN FILE --
 {markdown}
+-- END OF MARKDOWN FILE --
                 """,
             },
             {
