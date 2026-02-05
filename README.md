@@ -40,6 +40,14 @@ This will;
 - Puts the difficulty on easy/learning
 
 
+> [!IMPORTANT]  
+> Currently only models coming from ollama are supported. I'm working on adding support for more providers.
+You can as well change models if needed using;
+```cmd
+projectCreator init -l C -t 1h -d easy/learning -m gpt-oss
+```
+This would change the model to gpt-oss.
+
 ### Reviewing a assignment
 > [!CAUTION]
 > Reviewing would allow the LLM to gain full access over your computer terminal. While im planning to update that soon; **use it at your own risk**
