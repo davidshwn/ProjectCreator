@@ -2,13 +2,14 @@
 import argparse
 import os
 
+from .modules.documentation import documentation
 from .modules.init import init
 from .modules.review import review
 
 # load the classes
 initClass = init()
 reviewClass = review()
-
+documentationClass = documentation()
 
 """
 Parser functions
@@ -17,19 +18,49 @@ Parser functions
 
 # init funtion
 def initParser(args):
+    # get total steps
+    steps = 3
+    currentStep = 1
+    if args.documentation:
+        steps += 3
+
     print("Creating project idea. This may take some time based on hardware.")
     # get systemPrompt
-    print("Creating system prompt. (1/3)")
+    print(f"Creating instructions system prompt. ({currentStep}/{steps})")
     systemPrompt: str = initClass.generatePrompt(args)
-    # print(systemPrompt)
+
+    currentStep += 1
 
     # Let the LLM generate a system prompt
-    print("Generating Instructions (.MD) file. (2/3)")
+    print(f"Generating Instructions (.MD) file. ({currentStep}/{steps})")
     instructions = initClass.generateMd(systemPrompt, args.model)
 
-    print(f"Creating instructions file. (3/3)")
+    currentStep += 1
+
+    print(f"Creating instructions file. ({currentStep}/{steps})")
     with open(f"{os.path.abspath(os.getcwd())}/Instructions.md", "w") as f:
         f.write(instructions)
+
+    # if documentation is enabled
+    if args.documentation:
+        print(f"Creating documentation system prompt. ({currentStep}/{steps})")
+        systemPromptDoc: str = documentationClass.generatePrompt(args)
+
+        currentStep += 1
+
+        print(f"Generating documentation (.MD) file. ({currentStep}/{steps})")
+        documentation = documentationClass.generateMd(
+            systemPromptDoc, args.model, instructions
+        )
+
+        currentStep += 1
+
+        # print(documentation)
+        print(f"Creating documentation file. ({currentStep}/{steps})")
+        with open(f"{os.path.abspath(os.getcwd())}/documentation.md", "w") as f:
+            f.write(documentation)
+
+        currentStep += 1
 
     print(
         f"-- COMPLETED --\nInstructions: {os.path.abspath(os.getcwd())}/Instructions.md"
@@ -137,6 +168,12 @@ def main():
         help="Give the llm custom instructions if needed. [Default; None]",
         default="none",
         type=str,
+    )
+    parser_init.add_argument(
+        "--documentation",
+        help="Adds a documentation file to the project, useful if the user wants general documentation. [Default; True]",
+        default=True,
+        type=bool,
     )
     parser_init.set_defaults(func=initParser)
 

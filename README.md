@@ -1,4 +1,4 @@
-# ProjectCreator (WIP)
+# ProjectCreator
 A easier way to create projects to grow your skills.
 
 > [!IMPORTANT]  
@@ -60,8 +60,10 @@ to review a assignment navigate to the folder you're working in and run ``projec
 ProjectCreator assumes upon reviewing the code you're running on linux. If you're on another os such as Windows run; ``projectcreator review -p windows``.
 
 ## Issues and feedback
+> [!NOTE]  
+> WhoIsDavid may not allow the creation of accounts, consider going to the github mirror and create a issue there.
 
-If you experience any issues or have any feedback feel free to create a issue!
+If you experience any issues or have any feedback feel free to create a issue on the service you're cloning it from!
 
 ## License
 This project is released under the [Apache License 2.0](LICENSE)

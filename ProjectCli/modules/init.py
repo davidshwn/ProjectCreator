@@ -23,7 +23,7 @@ class init:
         return f"""You will give the user a markdown formatted programming project they can work on.
 - Align the project based on this information.
 - This project is intended for users that want to practise their programming skills.
-- When creating the markdown file always include the following things; header, instruction, final product, rules, general information provided by user (Details), Technical Requirements, and lastly the points (score)
+- When creating the markdown file always include the following things; header, instruction, final product, rules, general information provided by user (Details), Technical Requirements, and lastly the points/score (provided in a table using markdown)
 - do NOT use markdown blocks as your response will immediately be injected into a .MD file upon completion.
 - If the user did not provide a Programming Language (based on details) the assign the user one based on the project. Clearly define the language in the MD file
 - Make the user decide on their own which packages they want to use unless explicitly specified in Custom user instructions and/or General Details
